@@ -1,14 +1,260 @@
+
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" >
-    <title>My First Webpage</title>
+    <title>Multiple Choice</title>
+    <link rel = "stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/project.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+  #displayQuestion {
+    font-size: 48px;    
+    font-weight: bold;
+    text-align: center; 
+    margin: 40px auto; 
+  }
+
+  #answers {
+  display: flex;             
+  justify-content: center;    
+  gap: 20px;               
+  margin-top: 30px;
+}
+
+#answers button {
+  padding: 20px 30px;         
+  font-size: 20px;          
+  border: 2px solid #333;     
+  border-radius: 10px;        
+  background-color: #f8f8f8;  
+  cursor: pointer;           
+  transition: 0.2s ease;    
+}
+
+#answers button:hover {
+  background-color: #ddd;   
+}
+
+#scoreboard {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#start {
+    justify-content: center;   
+        text-align: center; 
+          margin-top: 30px;
+            font-size: 20px;  
+}
+  .hidden { display: none; } 
+
+  #endScreen {                 
+    text-align: center;
+    margin-top: 50px;
+    font-size: 22px;
+    font-weight: 600;
+  }
+  #endScreen button {   
+    margin-top: 20px;
+    padding: 12px 18px;
+    border: 2px solid #333;
+    border-radius: 10px;
+    background: #f8f8f8;
+    cursor: pointer;
+  }
+</style>
 </head>
+
 <body>
-    <!-- This is a comment -->
-    <h1> Chloe Walsh</h1>
-    <p>Computer Science student at BSU. Currently enrolled in Web Application Development.<br>
-        <a href="project.html">Here's a link to the next page.</a> 
-    </p>
+    <div id="scoreboard">
+  ✅ Correct: <span id="correctCount">0</span> |
+  ❌ Incorrect: <span id="incorrectCount">0</span>
+</div>
+
+
+ <div id="displayQuestion">Click Start</div>
+
+<div id="answers" class="hidden">
+  <button id="displayAnswer1"></button>
+  <button id="displayAnswer2"></button>
+  <button id="displayAnswer3"></button>
+  <button id="displayAnswer4"></button>
+</div>
+
+<div id="remainingQuestions" style="margin-top: 40px; text-align: center; font-weight: bold; display:none;"></div>
+
+
+<div id="startWrap">
+  <div id="start" style="text-align:center; margin-top:30px;">
+    <button id="startBtn" onclick="startFunction()">Lesson 1 Vocab</button>
+  </div>
+</div>
+
+
+<div id="endScreen" class="hidden">
+  <div id="endMessage"></div>
+  <button onclick="resetGame()">Play again</button>
+</div>
+
+<script>
+  const displayQuestion = document.getElementById("displayQuestion");
+  const displayAnswer1 = document.getElementById("displayAnswer1");
+  const displayAnswer2 = document.getElementById("displayAnswer2");
+  const displayAnswer3 = document.getElementById("displayAnswer3");
+  const displayAnswer4 = document.getElementById("displayAnswer4");
+
+  const answersWrap = document.getElementById("answers");
+  const startWrap = document.getElementById("startWrap");
+  const endScreen = document.getElementById("endScreen");
+  const endMessage = document.getElementById("endMessage");
+
+  const correctCountEl = document.getElementById("correctCount");
+  const incorrectCountEl = document.getElementById("incorrectCount");
+
+  let correctCount = 0;
+  let incorrectCount = 0;
+  let correctAnswer = "";
+  let remainingQuestions = [];
+  let buttonsDisabled = false;
+  let currentIndex = null;
+
+  function startFunction() {
+
+    startWrap.classList.add("hidden");
+    endScreen.classList.add("hidden");
+    answersWrap.classList.remove("hidden");
+
+    if (remainingQuestions.length === 0) {
+      remainingQuestions = c1vocab.map((_, i) => i);
+    }
+
+
+    if (remainingQuestions.length === 0) {
+      showEndScreen();
+      return;
+    }
+
+    displayQuestion.style.color = "black";
+
+    const randIdx = Math.floor(Math.random() * remainingQuestions.length);
+    currentIndex = remainingQuestions[randIdx];
+
+    const randomquestion = c1vocab[currentIndex];
+    displayQuestion.textContent = randomquestion;
+    correctAnswer = c1answers[currentIndex];
+
+  
+    const pool = c1answers;
+    const answers = [correctAnswer];
+    while (answers.length < 4) {
+      const wrongAnswer = pool[Math.floor(Math.random() * pool.length)];
+      if (!answers.includes(wrongAnswer)) answers.push(wrongAnswer);
+    }
+    answers.sort(() => Math.random() - 0.5);
+
+    displayAnswer1.textContent = answers[0];
+    displayAnswer2.textContent = answers[1];
+    displayAnswer3.textContent = answers[2];
+    displayAnswer4.textContent = answers[3];
+
+    updateRemainingQuestions();
+  }
+
+  [displayAnswer1, displayAnswer2, displayAnswer3, displayAnswer4].forEach(btn => {
+    btn.addEventListener("click", () => handleAnswer(btn));
+  });
+
+  function handleAnswer(btn) {
+    if (buttonsDisabled) return;
+    buttonsDisabled = true;
+
+    if (btn.textContent === correctAnswer) {
+      displayQuestion.style.color = "green";
+      correctCount++;
+      correctCountEl.textContent = correctCount;
+
+      remainingQuestions = remainingQuestions.filter(i => i !== currentIndex);
+      updateRemainingQuestions();
+
+      setTimeout(() => {
+
+        if (remainingQuestions.length === 0) {
+          showEndScreen();
+        } else {
+          buttonsDisabled = false;
+          startFunction();
+        }
+      }, 800);
+
+    } else {
+      displayQuestion.style.color = "red";
+      incorrectCount++;
+      incorrectCountEl.textContent = incorrectCount;
+
+      setTimeout(() => {
+        displayQuestion.style.color = "black";
+        buttonsDisabled = false;
+      }, 500);
+    }
+  }
+
+  function updateRemainingQuestions() {
+    const container = document.getElementById("remainingQuestions");
+
+    container.textContent = "Remaining: " + remainingQuestions.map(i => c1vocab[i]).join(", ");
+  }
+
+  function showEndScreen() {
+   buttonsDisabled = false;  
+    answersWrap.classList.add("hidden");
+
+
+    endMessage.textContent = `All done! ✅ Correct: ${correctCount} • ❌ Incorrect: ${incorrectCount}`;
+    endScreen.classList.remove("hidden");
+
+
+    displayQuestion.textContent = "Quiz complete!";
+    displayQuestion.style.color = "black";
+  }
+
+  function resetGame() {
+
+    correctCount = 0;
+    incorrectCount = 0;
+    correctCountEl.textContent = "0";
+    incorrectCountEl.textContent = "0";
+
+    remainingQuestions = c1vocab.map((_, i) => i);
+    currentIndex = null;
+      buttonsDisabled = false;   
+
+
+    endScreen.classList.add("hidden");
+    answersWrap.classList.remove("hidden");
+    displayQuestion.textContent = "Good luck!";
+    displayQuestion.style.color = "black";
+    startFunction();
+  }
+
+  // Your existing vocab/answers arrays stay the same
+  let c1vocab = ["だいがく","こうこう","がくせい","だいがくせい","りゅうがくせい","せんせい","～ねんせい","いちねんせい","せんこう","わたし","ともだち","～さん",
+    "～じん","にほんじん","いま","ごぜん","ごご","～じ","いちじ","はん","にじはん","にほん","アメリカ","～ご","にほんご","～さい","でんわ","～ばん","ばんごう",
+    "なまえ","なん／なに","あのう","はい","そうです","そうですか"];
+  let c1addvocab = ["イギリス","オーストラリア","かんこく","カナダ","ちゅうごく","インド","エジプト","フィリピン","アジアけんきゅう","けえざい","こうがく","こくさいかんけえ",
+    "コンピューター","せいじ","せいぶつがく","ビジネス","ぶんがく","れきし","いしゃ","かいしゃいん","かんごし","こうこうせい","しゅふ","だいがくいんせい","べんごし",
+    "おかあさん","おとうさん","おねえさん","おにいさん","いもうと","おとうと"];
+  let c1answers = ["college; university","high school","student","college student","international student","teacher; Professor...","...year student",
+    "first-year student","major","I","friend","Mr./Ms...","...people","Japanese people","now","A.M.","P.M.","o'clock","one o'clock","half","half past two","Japan",
+    "U.S.A.","...language","Japanese language","...years old","telephone","number...","number","name","what","um...","yes","That's right","I see; Is that so?"];
+  let c1addanswers = ["Britain","Australia","Korea","Canada","China","India","Egypt","Philippines","Asian studies","economics","engineering","international relations",
+    "computer","politics","biology","business","literature","history","doctor","office worker","nurse","high school student","housewife","graduate student","lawyer",
+    "mother","father","older sister","older brother","younger sister","younger brother"];
+</script>
+
 </body>
 </html>
