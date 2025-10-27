@@ -93,6 +93,7 @@
   <div id="start" style="text-align:center; margin-top:30px;">
 <button id="startBtn">Lesson 1 Vocab</button>
 <button id="startBtnAdd">Lesson 1 Additional Vocab</button>
+<button id="startBtn2">Lesson 2 Vocab</button>
   </div>
 </div>
 
@@ -103,6 +104,8 @@
 </div>
 
 <script>
+  let vocab = [];
+  let answerbank = [];
     let useAdd = false
     document.getElementById("startBtnAdd").addEventListener("click", () => {
   useAdd = true;  
@@ -110,6 +113,23 @@
 });
     document.getElementById("startBtn").addEventListener("click", () => {
   useAdd = false;  
+      vocab = ["だいがく","こうこう","がくせい","だいがくせい","りゅうがくせい","せんせい","～ねんせい","いちねんせい","せんこう","わたし","ともだち","～さん",
+    "～じん","にほんじん","いま","ごぜん","ごご","～じ","いちじ","はん","にじはん","にほん","アメリカ","～ご","にほんご","～さい","でんわ","～ばん","ばんごう",
+    "なまえ","なん／なに","あのう","はい","そうです","そうですか"];
+      answerbank = ["college; university","high school","student","college student","international student","teacher; Professor...","...year student",
+    "first-year student","major","I","friend","Mr./Ms...","...people","Japanese people","now","A.M.","P.M.","o'clock","one o'clock","half","half past two","Japan",
+    "U.S.A.","...language","Japanese language","...years old","telephone","number...","number","name","what","um...","yes","That's right","I see; Is that so?"];
+  startFunction();
+});
+
+    document.getElementById("startBtn2").addEventListener("click", () => {
+  useAdd = false;  
+        vocab = ["これ","それ","あれ","どれ","この","その","あの","どの","ここ","そこ","あそこ","どこ",
+    "だれ","おいしい","さかな","とんかつ","にく","メニュー","やさい","かさ","かばん","くつ","さいふ","ジーンズ","じてんしゃ","しんぶん","スマホ","ｔシャツ","とけい",
+    "ノート","ペン","ぼうし","ほん","ぎんこう","コンビニ","トイレ","としょかん","ゆうびんきょく","イギリス","かんこく","ちゅうごく","えいご","けいざい","コンピューター","ビジネス","れきし","おかあさん","おとうさん","いくら","～えん","たかい","いらっしゃいませ","（～を）お願いします","（～を）ください","じゃあ","どうぞ","どうも" ];
+      answerbank = ["this one","that one","that one (over there)","which one","this...","that...","that... (over there)",
+    "which...","here","there","over there","where","who","delicious","fish","pork cutlet","meat","menu","vegetable","umbrella","bag","shoes",
+    "wallet","jeans","bicycle","newspaper","smartphone; mobile","T-shirt","watch; clock","notebook","pen","hat; cap","book","bank","convenience store","toilet; restroom","library","post office","Britain","Korea","China","English (language)","economics","computer","business","history","mother","father","how much","...yen","expensive; high","Welcome (to our store)","..., please","Please give me...","then...; if that is the case,...","Please.; Here it is.","Thank you."];
   startFunction();
 });
 
@@ -145,7 +165,7 @@
             remainingQuestions = c1addvocab.map((_, i) => i);
         }
         else{
-      remainingQuestions = c1vocab.map((_, i) => i); }
+      remainingQuestions = vocab.map((_, i) => i); }
     }
 
 
@@ -160,14 +180,14 @@
     currentIndex = remainingQuestions[randIdx];
     let randomquestion = ""
     if (useAdd){randomquestion = c1addvocab[currentIndex];}
-    else {randomquestion = c1vocab[currentIndex];}
+    else {randomquestion = vocab[currentIndex];}
     displayQuestion.textContent = randomquestion;
     if (useAdd){correctAnswer = c1addanswers[currentIndex];}
-    else{correctAnswer = c1answers[currentIndex];}
+    else{correctAnswer = answerbank[currentIndex];}
 
     let pool = ""
     if(useAdd){pool = c1addanswers;}
-    else{pool = c1answers;}
+    else{pool = answerbank;}
     const answers = [correctAnswer];
     while (answers.length < 4) {
       const wrongAnswer = pool[Math.floor(Math.random() * pool.length)];
@@ -224,7 +244,7 @@
   function updateRemainingQuestions() {
     const container = document.getElementById("remainingQuestions");
     if (useAdd){container.textContent = "Remaining: " + remainingQuestions.map(i => c1addvocab[i]).join(", ");}
-    else{container.textContent = "Remaining: " + remainingQuestions.map(i => c1vocab[i]).join(", ");}
+    else{container.textContent = "Remaining: " + remainingQuestions.map(i => vocab[i]).join(", ");}
   }
 
   function showEndScreen() {
@@ -247,7 +267,7 @@
     correctCountEl.textContent = "0";
     incorrectCountEl.textContent = "0";
     if (useAdd){remainingQuestions = c1addvocab.map((_, i) => i);}
-    else{remainingQuestions = c1vocab.map((_, i) => i);}
+    else{remainingQuestions = vocab.map((_, i) => i);}
     currentIndex = null;
       buttonsDisabled = false;   
 
@@ -260,15 +280,9 @@
   }
 
   // Your existing vocab/answers arrays stay the same
-  let c1vocab = ["だいがく","こうこう","がくせい","だいがくせい","りゅうがくせい","せんせい","～ねんせい","いちねんせい","せんこう","わたし","ともだち","～さん",
-    "～じん","にほんじん","いま","ごぜん","ごご","～じ","いちじ","はん","にじはん","にほん","アメリカ","～ご","にほんご","～さい","でんわ","～ばん","ばんごう",
-    "なまえ","なん／なに","あのう","はい","そうです","そうですか"];
   let c1addvocab = ["イギリス","オーストラリア","かんこく","カナダ","ちゅうごく","インド","エジプト","フィリピン","アジアけんきゅう","けいざい","こうがく","こくさいかんけえ",
     "コンピューター","せいじ","せいぶつがく","ビジネス","ぶんがく","れきし","いしゃ","かいしゃいん","かんごし","こうこうせい","しゅふ","だいがくいんせい","べんごし",
     "おかあさん","おとうさん","おねえさん","おにいさん","いもうと","おとうと"];
-  let c1answers = ["college; university","high school","student","college student","international student","teacher; Professor...","...year student",
-    "first-year student","major","I","friend","Mr./Ms...","...people","Japanese people","now","A.M.","P.M.","o'clock","one o'clock","half","half past two","Japan",
-    "U.S.A.","...language","Japanese language","...years old","telephone","number...","number","name","what","um...","yes","That's right","I see; Is that so?"];
   let c1addanswers = ["Britain","Australia","Korea","Canada","China","India","Egypt","Philippines","Asian studies","economics","engineering","international relations",
     "computer","politics","biology","business","literature","history","doctor","office worker","nurse","high school student","housewife","graduate student","lawyer",
     "mother","father","older sister","older brother","younger sister","younger brother"];
