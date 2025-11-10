@@ -94,6 +94,9 @@
 <button id="startBtn">Lesson 1 Vocab</button>
 <button id="startBtnAdd">Lesson 1 Additional Vocab</button>
 <button id="startBtn2">Lesson 2 Vocab</button>
+<button id="startBtn3">Lesson 3 Vocab</button>
+
+<button id="startBtnP1">Practice Hiragana</button>
   </div>
 </div>
 
@@ -126,10 +129,34 @@
   useAdd = false;  
         vocab = ["これ","それ","あれ","どれ","この","その","あの","どの","ここ","そこ","あそこ","どこ",
     "だれ","おいしい","さかな","とんかつ","にく","メニュー","やさい","かさ","かばん","くつ","さいふ","ジーンズ","じてんしゃ","しんぶん","スマホ","ｔシャツ","とけい",
-    "ノート","ペン","ぼうし","ほん","ぎんこう","コンビニ","トイレ","としょかん","ゆうびんきょく","イギリス","かんこく","ちゅうごく","えいご","けいざい","コンピューター","ビジネス","れきし","おかあさん","おとうさん","いくら","～えん","たかい","いらっしゃいませ","（～を）お願いします","（～を）ください","じゃあ","どうぞ","どうも" ];
+    "ノート","ペン","ぼうし","ほん","ぎんこう","コンビニ","トイレ","としょかん","ゆうびんきょく","イギリス","かんこく","ちゅうごく","えいご","けいざい","コンピューター","ビジネス","れきし","おかあさん","おとうさん","いくら","～えん","たかい","いらっしゃいませ","（～を）おねがいします","（～を）ください","じゃあ","どうぞ","どうも" ];
       answerbank = ["this one","that one","that one (over there)","which one","this...","that...","that... (over there)",
     "which...","here","there","over there","where","who","delicious","fish","pork cutlet","meat","menu","vegetable","umbrella","bag","shoes",
     "wallet","jeans","bicycle","newspaper","smartphone; mobile","T-shirt","watch; clock","notebook","pen","hat; cap","book","bank","convenience store","toilet; restroom","library","post office","Britain","Korea","China","English (language)","economics","computer","business","history","mother","father","how much","...yen","expensive; high","Welcome (to our store)","..., please","Please give me...","then...; if that is the case,...","Please.; Here it is.","Thank you."];
+  startFunction();
+});
+
+    document.getElementById("startBtn3").addEventListener("click", () => {
+  useAdd = false;  
+        vocab = ["えいが","おんがく","ざっし","スポーツ","デート","テニス","テレビ","アイスクリーム","ハンバーガー","おさけ","おちゃ","コーヒー",
+    "みず","あさごはん","ひるごはん","ばんごはん","いえ/うち","がっこう","カフェ","あした","きょう","あさ","こんばん","まいにち","まいばん", "しゅうまつ","どようび","にちようび","いつ",
+    "～ごろ","いく","かえる","きく","のむ","はなす","よむ","おきる","たべる","ねる","みる","くる","する","べんきょうする","いい","はやい","あまり + negative","ぜんぜん + negative","たいてい","ちょっと","ときどき","よく","そうですね","でも","どうですか","ええ" ];
+      answerbank = ["movie","music","magazine","sports","date (romantic, not calendar)","tennis","TV",
+    "ice cream","hamburger","sake; alcoholic drink","green tea","coffee","water","breakfast","lunch","dinner","home; house","school","cafe","tomorrow","today",
+    "morning","tonight","every day","every night","weekend","Saturday","Sunday","when","at about...","to go","to go back; to return","to listen; to hear","to drink","to speak; to talk","to read","to get up","to eat","to sleep; to go to sleep","to see; to look at; to watch","to come","to do","to study","good","early","not much","not at all","usually","a little","sometimes","often; much","That's right; Let me see","but","How about...?; How is...?","yes",];
+  startFunction();
+});
+
+    document.getElementById("startBtnP1").addEventListener("click", () => {
+  useAdd = false;  
+        vocab = ["あ","い","う","え","お","か","き","く","け","こ","さ","し",
+    "す","せ","そ","た","ち","つ","て","と","な","に","ぬ","ね","の", "は","ひ","ふ","へ",
+    "ほ","ま","み","む","め","も","や","ゆ","よ","ら","り","る","れ","ろ","わ","を","ん","が","ぎ","ぐ","げ","ご","ざ","じ","ず","ぜ",
+  "ぞ","だ","で","ど","ば","び","ぶ","べ","ぼ","ぱ","ぴ","ぷ","ぺ","ぽ" ]; //"ぢ","づ",
+      answerbank =  ["a","i","u","e","o","ka","ki","ku","ke","ko","sa","shi",
+    "su","se","so","ta","chi","tsu","te","to","na","ni","nu","ne","no", "ha","hi","fu","he",
+    "ho","ma","mi","mu","me","mo","ya","yu","yo","ra","ri","ru","re","ro","wa","wo","n","ga","gi","gu","ge","go","za","ji","zu","ze",
+  "zo","da","de","do","ba","bi","bu","be","bo","pa","pi","pu","pe","po" ]; //"ji","zu",
   startFunction();
 });
 
