@@ -95,8 +95,10 @@
 <button id="startBtnAdd">Lesson 1 Additional Vocab</button>
 <button id="startBtn2">Lesson 2 Vocab</button>
 <button id="startBtn3">Lesson 3 Vocab</button>
+<button id="startBtn4">Lesson 4 Vocab</button>
 
 <button id="startBtnP1">Practice Hiragana</button>
+<button id="startBtnP2">Practice Katakana</button>
   </div>
 </div>
 
@@ -147,12 +149,36 @@
   startFunction();
 });
 
+    document.getElementById("startBtn4").addEventListener("click", () => {
+  useAdd = false;  
+        vocab = ["ゲーム","アルバイト","かいもの","クラス","いぬ","ねこ","ひと","こども","あなた","いす","つくえ","しゃしん",
+    "はな","レポート","ごはん","パン","おてら","こうえん","スーパー","バスてい","びょういん","ホテル","ほんや","まち","レストラン", "きのう","～じかん","いちじかん","せんしゅう",
+    "とき","げつようび","かようび","すいようび","もくようび","きんようび","あう","ある","かう","かく","とる","まつ","わかる","いる","～ぐらい","ごめんなさい","それから","だから","たくさん","～と","どうして","ひとりで","もしもし","みぎ","ひだり","まえ","うしろ","なか","うえ","した","ちかく","となり","あいだ"];
+      answerbank = ["game","part-time job","shopping","class","dog","cat","person",
+    "child","you","chair","desk","picture; photograph","flower","(term) paper","rice; meal","bread","temple","park","supermarket","bus stop","hospital",
+    "hotel","bookstore","town; city","restaurant","yesterday","...hours","one hour","last week","when...; at the time of...","Monday","Tuesday","Wednesday","Thursday","Friday","to meet; to see (a person)","there is...","to buy","to write","to take (a picture)","to wait","to understand","(a person) is in...; stays at...","about (approximate measurement)","I'm sorry","and then","so; therefore","many; a lot","together with (a person); and","why","alone","Hello? (used on the phone)","right","left","front","back","inside","on","under","near; nearby","next", "between"];
+  startFunction();
+});
+
     document.getElementById("startBtnP1").addEventListener("click", () => {
   useAdd = false;  
         vocab = ["あ","い","う","え","お","か","き","く","け","こ","さ","し",
     "す","せ","そ","た","ち","つ","て","と","な","に","ぬ","ね","の", "は","ひ","ふ","へ",
     "ほ","ま","み","む","め","も","や","ゆ","よ","ら","り","る","れ","ろ","わ","を","ん","が","ぎ","ぐ","げ","ご","ざ","じ","ず","ぜ",
   "ぞ","だ","で","ど","ば","び","ぶ","べ","ぼ","ぱ","ぴ","ぷ","ぺ","ぽ" ]; //"ぢ","づ",
+      answerbank =  ["a","i","u","e","o","ka","ki","ku","ke","ko","sa","shi",
+    "su","se","so","ta","chi","tsu","te","to","na","ni","nu","ne","no", "ha","hi","fu","he",
+    "ho","ma","mi","mu","me","mo","ya","yu","yo","ra","ri","ru","re","ro","wa","wo","n","ga","gi","gu","ge","go","za","ji","zu","ze",
+  "zo","da","de","do","ba","bi","bu","be","bo","pa","pi","pu","pe","po" ]; //"ji","zu",
+  startFunction();
+});
+
+    document.getElementById("startBtnP2").addEventListener("click", () => {
+  useAdd = false;  
+        vocab = ["ア","イ","ウ","エ","オ","カ","キ","ク","ケ","コ","サ","シ",
+    "ス","セ","ソ","タ","チ","ツ","テ","ト","ナ","ニ","ヌ","ネ","ノ", "ハ","ヒ","フ","ヘ",
+    "ホ","マ","ミ","ム","メ","モ","ヤ","ユ","ヨ","ラ","リ","ル","レ","ロ","ワ","ヲ","ン","ガ","ギ","グ","ゲ","ゴ","ザ","ジ","ズ","ゼ",
+  "ゾ","ダ","デ","ド","バ","ビ","ブ","ベ","ボ","パ","ピ","プ","ペ","ポ" ]; //"ぢ","づ",
       answerbank =  ["a","i","u","e","o","ka","ki","ku","ke","ko","sa","shi",
     "su","se","so","ta","chi","tsu","te","to","na","ni","nu","ne","no", "ha","hi","fu","he",
     "ho","ma","mi","mu","me","mo","ya","yu","yo","ra","ri","ru","re","ro","wa","wo","n","ga","gi","gu","ge","go","za","ji","zu","ze",
