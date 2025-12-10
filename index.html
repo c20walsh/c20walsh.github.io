@@ -123,7 +123,8 @@
 
 <div id="endScreen" class="hidden">
   <div id="endMessage"></div>
-  <button onclick="resetGame()">Play again</button>
+  <button onclick="resetGame()">Play again</button> <br>
+  <button onclick="resetpage()">Go Back</button>
 </div>
 
 <script>
@@ -350,6 +351,10 @@
     startFunction();
   }
 
+  function resetpage() {
+    window.location.reload();
+  }
+
   // Your existing vocab/answers arrays stay the same
   let c1addvocab = ["イギリス","オーストラリア","かんこく","カナダ","ちゅうごく","インド","エジプト","フィリピン","アジアけんきゅう","けいざい","こうがく","こくさいかんけえ",
     "コンピューター","せいじ","せいぶつがく","ビジネス","ぶんがく","れきし","いしゃ","かいしゃいん","かんごし","こうこうせい","しゅふ","だいがくいんせい","べんごし",
@@ -361,3 +366,4 @@
 </div>
 </body>
 </html>
+ 
